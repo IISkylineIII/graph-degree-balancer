@@ -1,16 +1,9 @@
-### Graph Degree Balancer
+### Directed Graph Degree Balancer
+This script analyzes a directed graph represented as an adjacency list, calculates the in-degrees and out-degrees of each node, and determines the minimum number of edges required to balance the graph.
 
-Graph Degree Balancer is a tool to calculate and balance the in-degrees and out-degrees of a directed graph. This process is useful to ensure that all nodes have the same number of incoming and outgoing edges, which is important in problems like path reconstruction in De Bruijn graphs or in load-balancing algorithms.
+### Usage
 
-### Functionality
-Calculates the in-degree and out-degree of each node.
-Determines the minimum number of edges that need to be added to the graph to balance the in-degrees and out-degrees of all nodes.
-
-### Graph Structure
-The input graph is represented as a Python dictionary, where each node is a key and its neighbors (outgoing nodes) are stored in a list as the value.
-
-Example graph: 
-
+```
 adjacency_list = {
     1: [2, 3, 5],
     2: [1, 4],
@@ -18,47 +11,26 @@ adjacency_list = {
     4: [1, 2, 5],
     5: [3]
 }
+```
+### The script calculates:
 
-### Installation
-You can use the code directly or import the functions into your own project. There are no external dependencies required.
+* Out-degrees: number of edges going out of a node.
+* In-degrees: number of edges coming into a node.
+* Then, it computes the minimum number of directed edges that must be added to make the graph balanced (i.e., each node has equal in-degree and out-degree).
 
-### How to Use
-Define the graph as a dictionary, where each key is a node and each value is a list of neighbors.
+### Example Output:
+The minimum number of edges to add is: 4
 
-The algorithm will compute the in-degrees and out-degrees and determine the minimum number of edges required to balance the degrees.
+### Requirements
+This script is compatible with Python 3 and uses only built-in data structures (dict, set).
+No external libraries are needed.
 
-### Example Usage
-
-# Example graph
-adjacency_list = {
-    1: [2, 3, 5],
-    2: [1, 4],
-    3: [2, 5],
-    4: [1, 2, 5],
-    5: [3]
-}
-
-# Initialize degree dictionaries
-in_degrees = {}
-out_degrees = {}
-
-# Calculate in-degrees and out-degrees
-for node, neighbors in adjacency_list.items():
-    out_degrees[node] = len(neighbors)
-    for neighbor in neighbors:
-        in_degrees[neighbor] = in_degrees.get(neighbor, 0) + 1
-
-# Calculate the minimum number of edges to add
-min_edges_to_add = sum(abs(in_degrees.get(node, 0) - out_degrees.get(node, 0)) for node in set(in_degrees) | set(out_degrees))
-
-print(f"The minimum number of edges to add is: {min_edges_to_add}")
-
-### Expected Output
-This code will calculate the minimum number of edges that need to be added to balance the in-degrees and out-degrees of the graph.
-
-### Contribution
-If you would like to contribute to this project, feel free to fork the repository and submit pull requests with improvements or fixes.
+### Applications
+This tool is useful in:
+* Network flow analysis, to ensure input-output balance in systems such as logistics or data routing.
+* Graph theory studies, to explore node degree balancing problems.
+* Preprocessing directed graphs for algorithms that require balanced structures (e.g., Eulerian circuits).
+* Educational purposes, for teaching concepts related to in-degrees, out-degrees, and graph balancing.
 
 ### License
-This project is licensed under the MIT License.
-
+This project is released under the MIT License. You may freely use, modify, and distribute this script.
